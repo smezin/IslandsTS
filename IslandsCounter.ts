@@ -27,7 +27,7 @@ export function islandsCounter (grid: string[][], search: string): number {
     let width = grid[0].length;
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
-            if (grid[row][col] == STATE.newLand) { 
+            if (grid[row][col] === STATE.newLand) { 
                 islandsCount++;
                 if (search === 'dfs'){
                     dfs(row, col); 
@@ -40,7 +40,7 @@ export function islandsCounter (grid: string[][], search: string): number {
     //return grid to original state
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
-            if (grid[row][col] == STATE.visitedLand) {
+            if (grid[row][col] === STATE.visitedLand) {
                 grid[row][col] = STATE.newLand
             }
         }
@@ -50,7 +50,7 @@ export function islandsCounter (grid: string[][], search: string): number {
     // Recursive stack implementation DFS traversal
     function dfs(row: number, col: number) {
         if (row < 0 || row >= height || col < 0 || 
-            col >= width || grid[row][col] == STATE.sea || grid[row][col] == STATE.visitedLand) {
+            col >= width || grid[row][col] === STATE.sea || grid[row][col] === STATE.visitedLand) {
             return;
         }
         grid[row][col] = STATE.visitedLand;
@@ -64,7 +64,7 @@ export function islandsCounter (grid: string[][], search: string): number {
         while (queue.length > 0) {
             let [row, col] = queue.shift();
             if (row < 0 || row >= height || col < 0 || col >= width 
-                || grid[row][col] == STATE.sea || grid[row][col] == STATE.visitedLand) continue;
+                || grid[row][col] === STATE.sea || grid[row][col] === STATE.visitedLand) continue;
             grid[row][col] = STATE.visitedLand; 
             for (let direction of DIRECTIONS) {
                 queue.push([row + direction[0], col + direction[1]]);
